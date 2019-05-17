@@ -39,7 +39,11 @@ public:
 	Nodo * obtenerNodoSiguiente();
 	void asignarNodoSiguiente(Nodo * nuevoNodo);
 	void asignarDatosNodo(string nombre, string fechaI, string fechaV, string t, string cont);
-	void imprimirNodo();
+	string obtenerNombreMedicamento();
+	string obtenerFechaInicio();
+	string obtenerFechaVencimiento();
+	string obtenerTipo();
+	string obtenerContenido();
 };
 
 Nodo * Nodo::obtenerNodoSiguiente()
@@ -60,22 +64,33 @@ void Nodo::asignarDatosNodo(string nombre, string fechaI, string fechaV, string 
 	contenido = cont;
 }
 
-void Nodo::imprimirNodo()
+string Nodo::obtenerNombreMedicamento()
 {
-	show("Nombre: \t");
-	showl(nombreMedicamento);
-	show("Fecha de inicio: \t");
-	showl(fechaInicio);
-	show("Fecha de vencimiento: \t");
-	showl(fechaVencimiento);
-	show("Tipo: \t");
-	showl(tipo);
-	show("Contenido: \t");
-	showl(contenido);
-	showl("");
+	return nombreMedicamento;
 }
 
-class Lista { //Clase lista de nodos
+string Nodo::obtenerFechaInicio()
+{
+	return fechaInicio;
+}
+
+string Nodo::obtenerFechaVencimiento()
+{
+	return fechaVencimiento;
+}
+
+string Nodo::obtenerTipo()
+{
+	return tipo;
+}
+
+string Nodo::obtenerContenido()
+{
+	return contenido;
+}
+
+//Clase Lista de nodos
+class Lista { 
 private:
 	Nodo * nodoInicial;
 	Nodo * nodoFinal;
@@ -155,7 +170,17 @@ void Lista::imprimirEnPantalla() {
 			for (int i = 0; i < cantidad; i++)
 			{
 				cout << "Medicamento " << i;
-				nodoAuxiliar->imprimirNodo();
+				show("Nombre: \t");
+				showl(nodoAuxiliar->obtenerNombreMedicamento);
+				show("Fecha de inicio: \t");
+				showl(nodoAuxiliar->obtenerFechaInicio);
+				show("Fecha de vencimiento: \t");
+				showl(nodoAuxiliar->obtenerFechaVencimiento);
+				show("Tipo: \t");
+				showl(nodoAuxiliar->obtenerTipo);
+				show("Contenido: \t");
+				showl(nodoAuxiliar->obtenerContenido);
+				showl("");
 				nodoAuxiliar = nodoAuxiliar->obtenerNodoSiguiente();
 			}
 			showl("");
@@ -169,19 +194,19 @@ void almacenarEnArchivo(Lista listaDeDatos) {//TODO, Utilizar punteros
 
 void menu() { //Mostrar opciones del menu
 	showl("Menu");
-	showl("1. Ingreso de Datos");
+	showl("1. Ingreso de datos");
 	showl("2. Impresion en pantalla");
 	showl("3. Almacenar en archivo");
 	showl("4. Ordenar informacion"); //Utilizar listas enlazadas. Pilas y colas, si es necesario
-	showl("10. Impresion de datos fisicamente");
-	showl("5. Salida");
+	showl("5. Impresion de datos fisicamente");
+	showl("6. Salida");
 }
 
 int main() {
 	int opcion = 20;
 	Lista listaDeDatos;
 	listaDeDatos.iniciarCantidad();
-	while (opcion != 5) {
+	while (opcion != 6) {
 		menu();
 		show("Seleccione una opcion: ");
 		cin >> opcion;
@@ -197,8 +222,11 @@ int main() {
 		case 2:
 			listaDeDatos.imprimirEnPantalla();
 			break;
-		default:
+		case 6:
 			break;
+		default:
+			showl("La opcion seleccionada no es valida.");
+			showl("");
 		}
 	}
 }
