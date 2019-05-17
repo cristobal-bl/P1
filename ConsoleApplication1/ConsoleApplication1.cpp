@@ -29,11 +29,17 @@ void show(string s) {
 class Nodo { //Clase Nodo de la lista
 private:
 	Nodo * nodoSiguiente;
+	string nombreMedicamento;
+	string fechaInicio;
+	string fechaVencimiento;
+	string tipo;
+	string contenido;
 
 public:
 	Nodo * obtenerNodoSiguiente();
 	void asignarNodoSiguiente(Nodo * nuevoNodo);
-	string dato;
+	void asignarDatosNodo(string nombre, string fechaI, string fechaV, string t, string cont);
+	void imprimirNodo();
 };
 
 Nodo * Nodo::obtenerNodoSiguiente()
@@ -46,17 +52,41 @@ void Nodo::asignarNodoSiguiente(Nodo * nuevoNodo)
 	nodoSiguiente = nuevoNodo;
 }
 
+void Nodo::asignarDatosNodo(string nombre, string fechaI, string fechaV, string t, string cont){
+	nombreMedicamento=nombre;
+	fechaInicio=fechaI;
+	fechaVencimiento = fechaV;
+	tipo = t;
+	contenido = cont;
+}
+
+void Nodo::imprimirNodo()
+{
+	show("Nombre: \t");
+	showl(nombreMedicamento);
+	show("Fecha de inicio: \t");
+	showl(fechaInicio);
+	show("Fecha de vencimiento: \t");
+	showl(fechaVencimiento);
+	show("Tipo: \t");
+	showl(tipo);
+	show("Contenido: \t");
+	showl(contenido);
+	showl("");
+}
+
 class Lista { //Clase lista de nodos
 private:
 	Nodo * nodoInicial;
 	Nodo * nodoFinal;
-	int cantidad = 0;
+	int cantidad;
 
 public:
 	void agregarNodo(Nodo * nuevoNodo);
 	Nodo * obtenerNodoInicial();
 	Nodo * obtenerNodoFinal();
 	void imprimirEnPantalla();
+	void iniciarCantidad();
 };
 
 void Lista::agregarNodo(Nodo * nuevoNodo) {
@@ -84,14 +114,33 @@ Nodo * Lista::obtenerNodoFinal()
 	return nodoFinal;
 }
 
+void Lista::iniciarCantidad(){
+	cantidad = 0;
+}
+
 /*
 	METODOS DE FUNCIONALIDADES DEL MENU
 */
 
 Nodo * ingresarDatos() {
 	Nodo * nuevoNodo = new Nodo;
-	showl("Ingrese la informacion: ");
-	cin >> nuevoNodo->dato;
+	string nombre;
+	string fechaI;
+	string fechaV;
+	string t;
+	string cont;
+	showl("Ingreso de Datos");
+	show("Ingrese el nombre del medicamento: ");
+	getline(std::cin, nombre);
+	show("Ingrese la fecha inicial: ");
+	getline(cin, fechaI);
+	show("Ingrese la fecha de vencimiento: ");
+	getline(cin, fechaV);
+	show("Ingrese el tipo: ");
+	getline(cin, t);
+	show("Ingrese el contenido: ");
+	getline(cin, cont);
+	nuevoNodo->asignarDatosNodo(nombre, fechaI, fechaV, t, cont);
 	return nuevoNodo;
 }
 
@@ -105,7 +154,8 @@ void Lista::imprimirEnPantalla() {
 			Nodo * nodoAuxiliar = nodoInicial;
 			for (int i = 0; i < cantidad; i++)
 			{
-				showl(nodoAuxiliar->dato);
+				cout << "Medicamento " << i;
+				nodoAuxiliar->imprimirNodo();
 				nodoAuxiliar = nodoAuxiliar->obtenerNodoSiguiente();
 			}
 			showl("");
@@ -130,6 +180,7 @@ void menu() { //Mostrar opciones del menu
 int main() {
 	int opcion = 20;
 	Lista listaDeDatos;
+	listaDeDatos.iniciarCantidad();
 	while (opcion != 5) {
 		menu();
 		show("Seleccione una opcion: ");
