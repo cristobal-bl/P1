@@ -7,6 +7,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -102,6 +103,7 @@ public:
 	Nodo * obtenerNodoFinal();
 	void imprimirEnPantalla();
 	void iniciarCantidad();
+	void almacenarEnArchivo();
 };
 
 void Lista::agregarNodo(Nodo * nuevoNodo) {
@@ -144,24 +146,29 @@ Nodo * ingresarDatos() {
 	string fechaV;
 	string t;
 	string cont;
-	showl("Ingreso de Datos");
-	show("Ingrese el nombre del medicamento: ");
+	string auxiliar;
+	showl("___________________________________");
+	showl("        [Ingreso de Datos]");
+	showl("Ingrese el nombre del medicamento: ");
+	getline(std::cin, auxiliar);
 	getline(std::cin, nombre);
-	show("Ingrese la fecha inicial: ");
+	showl("Ingrese la fecha inicial: ");
 	getline(cin, fechaI);
-	show("Ingrese la fecha de vencimiento: ");
+	showl("Ingrese la fecha de vencimiento: ");
 	getline(cin, fechaV);
-	show("Ingrese el tipo: ");
+	showl("Ingrese el tipo: ");
 	getline(cin, t);
-	show("Ingrese el contenido: ");
+	showl("Ingrese el contenido: ");
 	getline(cin, cont);
 	nuevoNodo->asignarDatosNodo(nombre, fechaI, fechaV, t, cont);
 	return nuevoNodo;
 }
 
 void Lista::imprimirEnPantalla() {
+	showl("___________________________________");
+	showl("       [Mostrar Informacion]");
 	if (cantidad == 0) {
-		showl("No hay informacion almacenada");
+		showl("   No hay informacion almacenada");
 		showl("");
 	}
 	else if (cantidad > 0) {
@@ -169,17 +176,17 @@ void Lista::imprimirEnPantalla() {
 			Nodo * nodoAuxiliar = nodoInicial;
 			for (int i = 0; i < cantidad; i++)
 			{
-				cout << "Medicamento " << i;
-				show("Nombre: \t");
-				showl(nodoAuxiliar->obtenerNombreMedicamento);
-				show("Fecha de inicio: \t");
-				showl(nodoAuxiliar->obtenerFechaInicio);
-				show("Fecha de vencimiento: \t");
-				showl(nodoAuxiliar->obtenerFechaVencimiento);
-				show("Tipo: \t");
-				showl(nodoAuxiliar->obtenerTipo);
-				show("Contenido: \t");
-				showl(nodoAuxiliar->obtenerContenido);
+				cout << "[Medicamento " << (i+1) << "]" << endl;
+				show("Nombre: ");
+				showl(nodoAuxiliar->obtenerNombreMedicamento());
+				show("Fecha de inicio: ");
+				showl(nodoAuxiliar->obtenerFechaInicio());
+				show("Fecha de vencimiento: ");
+				showl(nodoAuxiliar->obtenerFechaVencimiento());
+				show("Tipo: ");
+				showl(nodoAuxiliar->obtenerTipo());
+				show("Contenido: ");
+				showl(nodoAuxiliar->obtenerContenido());
 				showl("");
 				nodoAuxiliar = nodoAuxiliar->obtenerNodoSiguiente();
 			}
@@ -188,18 +195,49 @@ void Lista::imprimirEnPantalla() {
 	}
 }
 
-void almacenarEnArchivo(Lista listaDeDatos) {//TODO, Utilizar punteros
+void Lista::almacenarEnArchivo() {//TODO, Utilizar punteros
+	ofstream archivo;
+	
+	Nodo * nodoAuxiliar = nodoInicial;
+	archivo.open("Prueba.txt");
+	for (int i = 0; i < cantidad; i++)
+	{
+		archivo << "Medicamento " << i;
+		
+		archivo << "Nombre: " << nodoAuxiliar->obtenerNombreMedicamento() << endl;
+		archivo << "Fecha de inicio: " << nodoAuxiliar->obtenerFechaInicio() << endl;
+		archivo << "Fecha de vencimiento: " << nodoAuxiliar->obtenerFechaVencimiento() << endl;
+		archivo << "Tipo:" << nodoAuxiliar->obtenerTipo() << endl;
+		archivo << "Contenido: " << nodoAuxiliar->obtenerContenido() << endl;
+		nodoAuxiliar = nodoAuxiliar->obtenerNodoSiguiente();
+	}
 
+    archivo << "ingreso mi primer texto" << endl;
+    archivo << "segundo texto" << endl;
+    archivo << "final del texto" << endl;
+
+    archivo.close();
 }
 
 void menu() { //Mostrar opciones del menu
-	showl("Menu");
-	showl("1. Ingreso de datos");
-	showl("2. Impresion en pantalla");
-	showl("3. Almacenar en archivo");
-	showl("4. Ordenar informacion"); //Utilizar listas enlazadas. Pilas y colas, si es necesario
-	showl("5. Impresion de datos fisicamente");
-	showl("6. Salida");
+	show(" ");
+	for(int i = 0; i < 37; i++){
+		show("_");
+	}
+	showl("");
+	showl("|                                     |");
+	showl("|              MENU:                  |");
+	showl("|  1. Ingreso de datos                |");
+	showl("|  2. Impresion en pantalla           |");
+	showl("|  3. Almacenar en archivo            |");
+	showl("|  4. Ordenar informacion             |"); //Utilizar listas enlazadas. Pilas y colas, si es necesario
+	showl("|  5. Impresion de datos fisicamente  |");
+	showl("|  6. Salida                          |");
+	show("|");
+	for(int i = 0; i < 37; i++){
+		show("_");
+	}
+	showl("|");
 }
 
 int main() {
@@ -218,10 +256,14 @@ int main() {
 				listaDeDatos.agregarNodo(nuevoNodo);
 				showl("");
 			}
+			system("pause");
 			break;
 		case 2:
 			listaDeDatos.imprimirEnPantalla();
+			system("pause");
 			break;
+		case 3:
+			listaDeDatos.almacenarEnArchivo();
 		case 6:
 			break;
 		default:
