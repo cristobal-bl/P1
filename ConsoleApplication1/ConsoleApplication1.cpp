@@ -1,9 +1,4 @@
-// ConsoleApplication1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-//INVESTIGAR PILAS Y COLAS EN C++
-
-#include "pch.h"
+//#include "pch.h" //Visual Studio (Eliminar al final)
 #include <iostream>
 #include <stdlib.h>
 #include <string>
@@ -135,34 +130,6 @@ void Lista::iniciarCantidad(){
 	cantidad = 0;
 }
 
-/*
-	METODOS DE FUNCIONALIDADES DEL MENU
-*/
-
-Nodo * ingresarDatos() {
-	Nodo * nuevoNodo = new Nodo;
-	string nombre;
-	string fechaI;
-	string fechaV;
-	string t;
-	string cont;
-	string auxiliar;
-	showl("___________________________________");
-	showl("        [Ingreso de Datos]");
-	showl("Ingrese el nombre del medicamento: ");
-	getline(std::cin, auxiliar);
-	getline(std::cin, nombre);
-	showl("Ingrese la fecha inicial: ");
-	getline(cin, fechaI);
-	showl("Ingrese la fecha de vencimiento: ");
-	getline(cin, fechaV);
-	showl("Ingrese el tipo: ");
-	getline(cin, t);
-	showl("Ingrese el contenido: ");
-	getline(cin, cont);
-	nuevoNodo->asignarDatosNodo(nombre, fechaI, fechaV, t, cont);
-	return nuevoNodo;
-}
 
 void Lista::imprimirEnPantalla() {
 	showl("___________________________________");
@@ -195,7 +162,7 @@ void Lista::imprimirEnPantalla() {
 	}
 }
 
-void Lista::almacenarEnArchivo() {//TODO, Utilizar punteros
+void Lista::almacenarEnArchivo() {
 	ofstream archivo;
 	
 	Nodo * nodoAuxiliar = nodoInicial;
@@ -212,34 +179,61 @@ void Lista::almacenarEnArchivo() {//TODO, Utilizar punteros
 		nodoAuxiliar = nodoAuxiliar->obtenerNodoSiguiente();
 	}
 
-    archivo << "ingreso mi primer texto" << endl;
-    archivo << "segundo texto" << endl;
-    archivo << "final del texto" << endl;
-
     archivo.close();
 }
 
-void menu() { //Mostrar opciones del menu
+/*
+	METODOS DE FUNCIONALIDADES DEL MENU
+*/
+
+Nodo * ingresarDatos() {
+	Nodo * nuevoNodo = new Nodo;
+	string nombre;
+	string fechaI;
+	string fechaV;
+	string t;
+	string cont;
+	string auxiliar;
+	showl("___________________________________");
+	showl("        [Ingreso de Datos]");
+	showl("Ingrese el nombre del medicamento: ");
+	getline(std::cin, auxiliar);
+	getline(std::cin, nombre);
+	showl("Ingrese la fecha inicial: ");
+	getline(cin, fechaI);
+	showl("Ingrese la fecha de vencimiento: ");
+	getline(cin, fechaV);
+	showl("Ingrese el tipo: ");
+	getline(cin, t);
+	showl("Ingrese el contenido: ");
+	getline(cin, cont);
+	nuevoNodo->asignarDatosNodo(nombre, fechaI, fechaV, t, cont);
+	return nuevoNodo;
+}
+
+//Mostrar opciones del menu
+void menu() {
 	show(" ");
-	for(int i = 0; i < 37; i++){
+	for(int i = 0; i < 36; i++){
 		show("_");
 	}
 	showl("");
-	showl("|                                     |");
-	showl("|              MENU:                  |");
-	showl("|  1. Ingreso de datos                |");
-	showl("|  2. Impresion en pantalla           |");
-	showl("|  3. Almacenar en archivo            |");
-	showl("|  4. Ordenar informacion             |"); //Utilizar listas enlazadas. Pilas y colas, si es necesario
-	showl("|  5. Impresion de datos fisicamente  |");
-	showl("|  6. Salida                          |");
+	showl("|                                    |");
+	showl("|              MENU:                 |");
+	showl("|  1. Ingreso de datos               |");
+	showl("|  2. Impresion en pantalla          |");
+	showl("|  3. Almacenar en archivo           |");
+	showl("|  4. Proceso o accion               |"); //Utilizar listas enlazadas. Pilas y colas, si es necesario
+	showl("|  5. Impresion de ticket o boleta   |");
+	showl("|  6. Salida                         |");
 	show("|");
-	for(int i = 0; i < 37; i++){
+	for(int i = 0; i < 36; i++){
 		show("_");
 	}
 	showl("|");
 }
 
+//Método Principal
 int main() {
 	int opcion = 20;
 	Lista listaDeDatos;
@@ -272,15 +266,3 @@ int main() {
 		}
 	}
 }
-
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
