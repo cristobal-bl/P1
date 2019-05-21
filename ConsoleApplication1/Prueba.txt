@@ -1,0 +1,7 @@
+[Medicamento 1]
+Nombre: 1
+Fecha de inicio: 1
+Fecha de vencimiento: 1
+Tipo:1
+Contenido: 1
+
