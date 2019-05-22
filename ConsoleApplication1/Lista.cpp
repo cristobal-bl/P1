@@ -48,7 +48,7 @@ void Lista::imprimirEnPantalla() {
 			Nodo * nodoAuxiliar = nodoInicial;
 			for (int i = 0; i < cantidad; i++)
 			{
-				std::cout << "[Medicamento " << (i+1) << "]" << std::endl;
+				std::cout << "[Medicamento " << nodoAuxiliar->obtenerCodigoMedicamento() << "]" << std::endl;
 				show("Nombre: ");
 				showl(nodoAuxiliar->obtenerNombreMedicamento());
 				show("Fecha de inicio: ");
@@ -70,7 +70,7 @@ void Lista::imprimirEnPantalla() {
 void Lista::almacenarEnArchivo() {
 	if(cantidad == 0){
 		showl("_______________________________________");
-		showl("  [Almacenar informacin en archivo]");
+		showl("  [Almacenar informacion en archivo]");
 		showl("No hay informacion para almacenar");
 	}else{
 		showl("__________________________________________");
@@ -113,4 +113,8 @@ void Lista::almacenarEnArchivo() {
 		showl("");
 		showl("La informacion se guardo con exito");
 	}
+}
+
+int Lista::obtenerCantidad(){
+	return cantidad;
 }

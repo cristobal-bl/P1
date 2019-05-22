@@ -12,7 +12,7 @@ using namespace std;
 	METODOS DE FUNCIONALIDADES DEL MENU
 */
 
-Nodo * ingresarDatos() {
+Nodo * ingresarDatos(int codigo) {
 	Nodo * nuevoNodo = new Nodo;
 	string nombre;
 	string fechaI;
@@ -33,7 +33,9 @@ Nodo * ingresarDatos() {
 	getline(cin, t);
 	showl("Ingrese el contenido: ");
 	getline(cin, cont);
-	nuevoNodo->asignarDatosNodo(nombre, fechaI, fechaV, t, cont);
+	show("El codigo del medicamento es: ");
+	cout << codigo;
+	nuevoNodo->asignarDatosNodo(codigo, nombre, fechaI, fechaV, t, cont);
 	return nuevoNodo;
 }
 
@@ -67,12 +69,19 @@ int main() {
 	while (opcion != 6) {
 		menu();
 		show("Seleccione una opcion: ");
-		cin >> opcion;
+		try
+		{
+		    cin >> opcion;
+		}
+		catch(string e)
+		{
+		    system("pause");
+		}
 		switch (opcion)
 		{
 		case 1:
 			{
-				Nodo * nuevoNodo = ingresarDatos();
+				Nodo * nuevoNodo = ingresarDatos(listaDeDatos.obtenerCantidad() + 1);
 				listaDeDatos.agregarNodo(nuevoNodo);
 				showl("");
 			}

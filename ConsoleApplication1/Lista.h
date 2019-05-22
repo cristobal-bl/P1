@@ -17,6 +17,7 @@ public:
 	void imprimirEnPantalla();
 	void iniciarCantidad();
 	void almacenarEnArchivo();
+	int obtenerCantidad();
 };
 
 #endif

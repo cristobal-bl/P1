@@ -6,6 +6,7 @@
 class Nodo { //Clase Nodo de la lista
 private:
 	Nodo * nodoSiguiente;
+	int codigoMedicamento;
 	std::string nombreMedicamento;
 	std::string fechaInicio;
 	std::string fechaVencimiento;
@@ -15,7 +16,8 @@ private:
 public:
 	Nodo * obtenerNodoSiguiente();
 	void asignarNodoSiguiente(Nodo * nuevoNodo);
-	void asignarDatosNodo(std::string nombre, std::string fechaI, std::string fechaV, std::string t, std::string cont);
+	void asignarDatosNodo(int codigo, std::string nombre, std::string fechaI, std::string fechaV, std::string t, std::string cont);
+	int obtenerCodigoMedicamento();
 	std::string obtenerNombreMedicamento();
 	std::string obtenerFechaInicio();
 	std::string obtenerFechaVencimiento();

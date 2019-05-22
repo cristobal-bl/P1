@@ -10,12 +10,17 @@ void Nodo::asignarNodoSiguiente(Nodo * nuevoNodo)
 	nodoSiguiente = nuevoNodo;
 }
 
-void Nodo::asignarDatosNodo(std::string nombre, std::string fechaI, std::string fechaV, std::string t, std::string cont){
+void Nodo::asignarDatosNodo(int codigo, std::string nombre, std::string fechaI, std::string fechaV, std::string t, std::string cont){
+	codigoMedicamento = codigo;
 	nombreMedicamento=nombre;
 	fechaInicio=fechaI;
 	fechaVencimiento = fechaV;
 	tipo = t;
 	contenido = cont;
+}
+
+int Nodo::obtenerCodigoMedicamento(){
+	return codigoMedicamento;
 }
 
 std::string Nodo::obtenerNombreMedicamento()
