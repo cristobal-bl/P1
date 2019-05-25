@@ -1,7 +1,7 @@
 [Medicamento 1]
-Nombre: Medicamento 1
-Fecha de inicio: Fecha inicial
-Fecha de vencimiento: Fecha Vencimiento
-Tipo:Tipo X
-Contenido: Contenido ABC
+Nombre: Nombre 1
+Fecha de inicio: Fecha 1
+Fecha de vencimiento: Fecha 1v
+Tipo:Tipo 1
+Contenido: Contenido 1
 

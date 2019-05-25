@@ -48,7 +48,7 @@ void Lista::imprimirEnPantalla() {
 			Nodo * nodoAuxiliar = nodoInicial;
 			for (int i = 0; i < cantidad; i++)
 			{
-				std::cout << "[Medicamento " << nodoAuxiliar->obtenerCodigoMedicamento() << "]" << std::endl;
+				std::cout << "[Medicamento Codigo " << nodoAuxiliar->obtenerCodigoMedicamento() << "]" << std::endl;
 				show("Nombre: ");
 				showl(nodoAuxiliar->obtenerNombreMedicamento());
 				show("Fecha de inicio: ");
@@ -78,7 +78,7 @@ void Lista::almacenarEnArchivo() {
 		std::ofstream archivo;
 		
 		Nodo * nodoAuxiliar = nodoInicial;
-		archivo.open("Prueba.txt");
+		archivo.open("Medicamentos.txt");
 		for (int i = 0; i < cantidad; i++)
 		{
 			archivo << "[Medicamento " << (i+1) << "]" << std::endl;
@@ -117,4 +117,13 @@ void Lista::almacenarEnArchivo() {
 
 int Lista::obtenerCantidad(){
 	return cantidad;
+}
+
+Nodo * Lista::buscarMedicamento(int codigo){
+	Nodo * nodoAuxiliar = nodoInicial;
+	for (int i = 1; i < codigo; i++)
+		{
+			nodoAuxiliar = nodoAuxiliar->obtenerNodoSiguiente();
+		}
+	return nodoAuxiliar;
 }

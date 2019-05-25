@@ -1,0 +1,7 @@
+[Medicamento 1]
+Nombre: Med 1
+Fecha de inicio: 10/5/2019
+Fecha de vencimiento: 11/11/2019
+Tipo:Tipo 1
+Contenido: Contenido 1
+

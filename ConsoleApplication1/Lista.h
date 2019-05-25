@@ -18,6 +18,7 @@ public:
 	void iniciarCantidad();
 	void almacenarEnArchivo();
 	int obtenerCantidad();
+	Nodo * buscarMedicamento(int codigo);
 };
 
 #endif
